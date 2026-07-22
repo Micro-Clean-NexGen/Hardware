@@ -23,8 +23,7 @@ The AC/DC converter is fed by **220 V mains, which is potentially lethal.** If i
   driving normally.
 
 ## Equipment
-- ⚠️ Do **not** kill the LiDAR driver brutally mid-scan (it gets stuck → unplug/replug). See
-  [lidar.md](../electrical/sensors/lidar.md).
+- ⚠️ Do **not** kill the LiDAR driver brutally mid-scan (it gets stuck → unplug/replug).
 - Common ground: drivers' `COM` ↔ Teensy GND, always.
 
 ## Before autonomy (Nav2 / docking)
