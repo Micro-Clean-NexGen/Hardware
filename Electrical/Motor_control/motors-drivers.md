@@ -1,6 +1,6 @@
 # Motors & drivers (BLDC + ZBLD)
 
-*Last updated: 2026-06-17.*
+*Last updated: 2026-07-22.*
 
 ## Overview
 Two **BLDC** (brushless) motors, one per wheel, each driven by its own **ZBLD** driver. The Teensy
@@ -32,7 +32,7 @@ The motor-control signal chain is shown below.
 
 Per motor, 3 logic lines from the Teensy:
 
-| Teensy signal | Driver input | Meaning | Left pin | Right pin |
+| Arduino signal | Driver input | Meaning | Left pin | Right pin |
 |---|---|---|---|---|
 | PWM | `VAR / AI2` | speed setpoint — Teensy PWM @ **3 kHz** on this robot (driver capability: PWM 0–20 kHz, or analog 0–5 V) | **1** | **5** |
 | IN_A | `FWD / DI1` | forward direction | **20** | **6** |
