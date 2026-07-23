@@ -14,8 +14,8 @@ The base of the robot documented in this repo uses the **ZD** motor + driver. Th
 **TZBot** parts are **alternative / optional** components for larger product configurations
 (higher-power drives, wireless charging, lift, larger battery) — they are **not** on the base build as in the current version for MVP.
 
-| Folder | Component | On the base build? |
-|---|---|---|
+| Component | On the base build? |
+|---|---|
 | ZD BLDC motor (Z4BLD60-24GN-30S) + **ZBLD.C20-120L2R** driver | ✅ **yes — this is the base** |
 | ZLAC8015D / ZLAC8030L industrial drivers (CANopen/RS485) | ⚙️ option (higher-power variant) |
 |  ZLLG80 hub-motor wheel | ⚙️ option (alternative drivetrain) |
