@@ -7,5 +7,5 @@
 ![Mobility Block Diagram](Mobility%20Block%20Diagram.png)
 
 **Mobility Full Assembly**
-![Mobility Full Assembly](Mobility%20FullAssembly.png)
+![Mobility Full Assembly](Mobility_FullAssembly.png)
 
