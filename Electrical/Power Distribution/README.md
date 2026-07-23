@@ -1,10 +1,10 @@
 # Power & electrical safety
 
-*Last updated: 2026-06-20.*
+*Last updated: 2026-07-23.*
 
 ## 🔋 Battery state of charge — THRESHOLDS — READ BEFORE ANY NAV TEST
-The design takes **any 24 V battery** (chemistry is up to you). The at-rest thresholds below are for the
-**reference build's pack** (2× 12 V lead-acid in series) — **adjust the numbers for your chemistry**
+The design takes **any 24 V battery** . The at-rest thresholds below are for the
+**reference build's pack** 
 (LiFePO4 / Li-ion rest at different voltages and have flatter discharge curves). **At-rest** voltage
 (no load):
 
@@ -27,7 +27,7 @@ from this session is inconclusive until the battery is recharged (~25.5 V). To b
 
 The power distribution is shown in the diagram below.
 
-![Figure — power distribution: 230 V charger, 24 V battery (with the missing fuse and disconnect), 24 V drivers, and the buck-derived 5 V/3.3 V logic](diagrams/power-distribution.svg)
+![Figure — power distribution: 230 V charger, 24 V battery (with the missing fuse and disconnect), 24 V drivers, and the buck-derived 5 V/3.3 V logic](power-distribution.svg)
 
 ## Power architecture — VERIFIED 2026-06-19
 ```
