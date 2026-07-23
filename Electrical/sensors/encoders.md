@@ -1,6 +1,6 @@
 # Encoders (AS5040)
 
-*Last updated: 2026-06-17.*
+*Last updated: 2026-07-23.*
 
 ## Overview
 Magnetic incremental encoders, one per wheel, that let the Teensy measure each wheel's rotation
@@ -21,7 +21,7 @@ Magnetic incremental encoders, one per wheel, that let the Teensy measure each w
 > (no more 4 V), and the encoders **count cleanly** (validated over 3 sustained motor runs — see
 > the `openamr-platform-sw` troubleshooting doc (`docs/troubleshooting/diagnostics.md` in that repo)). The 5 V (VUSB) pin now feeds nothing (normal).
 > *Alternative fixes if 3.3 V had browned out:* series R ~1–2.2 kΩ or a divider per A/B line, or a
-> level-shifter. (The IMU is correctly on **3.3 V** — see [imu.md](imu.md).)
+> level-shifter. (The IMU is correctly on **3.3 V** 
 
 ## What is a "quadrature" encoder? (quick primer)
 An encoder measures wheel rotation. This one outputs **two square-wave signals, A and B, shifted 90°
@@ -57,15 +57,14 @@ is functionally confirmed: the firmware decodes clean A/B quadrature and the cou
 
 > ✅ **Confirmed 2026-06-19**: the chip marking reads **"AS5040 AB 2.2"** → it IS an AMS **AS5040**.
 > Its default incremental output is **256 PPR → 1024 counts/rev** in quadrature, which matches
-> `COUNTS_PER_REV = 1024` exactly. Datasheet + part list in [components-bom.md](../../manufacturing/bom/components-bom.md).
 
-## Communication (quadrature → Teensy)
+## Communication 
 
-The encoder-to-Teensy wiring is shown below.
+The encoder-to-Arduino wiring is shown below.
 
-![Figure — two AS5040 quadrature encoders on the 3.3 V rail: LEFT A/B to Teensy 14/15, RIGHT A/B to 11/12, common GND, with the quadrature-waveform inset (1024 counts/rev)](diagrams/encoder-wiring.svg)
+![Figure — two AS5040 quadrature encoders on the 3.3 V rail: LEFT A/B to Teensy 14/15, RIGHT A/B to 11/12, common GND, with the quadrature-waveform inset (1024 counts/rev)](encoder-wiring.svg)
 
-Two digital signals **A** and **B** in quadrature, read by the Teensy on **interrupt** pins. The phase
+Two digital signals **A** and **B** in quadrature, read by the Arduino on **interrupt** pins. The phase
 relationship between A and B gives direction; counting edges gives position.
 
 | Encoder | A pin | B pin |
@@ -83,7 +82,7 @@ In the firmware:
 - ✅ Direction sign correct on both sides (forward → counts increase, measured speed positive).
 - ✅ Under power they read real motion cleanly (no electrical glitch/dropout).
 
-> 🔧 **Right encoder was MISALIGNED (found & fixed 2026-06-19).** The robot snaked ("drunk"). A constant-PWM
+> 🔧 **Right encoder was MISALIGNED (found & fixed 2026-07-20).** The robot snaked ("drunk"). A constant-PWM
 > open-loop test **on the ground** (PID + driver loop bypassed) showed the right wheel oscillating wildly
 > (6–62 rpm) while the left was smooth — but it was smooth **in the air** → a load/vibration-dependent
 > fault. Cause: the right **AS5040 magnet was off-center** → erratic counts under load → the PID reacted →
@@ -131,11 +130,8 @@ table loaded `/debug/left|right.y` is the raw residual:
 > `openamr-platform-fw` Teensy 4.0 overlay — `firmware.ino` `calib_rpm`, `/debug/enc_cal`.)
 
 ## Good to know / gotchas
-- ⚠️ **CPR vs wheel + gearbox (1:25)**: the motors are **geared 1:25** (Z4BLD60-24GN-30S + 4GN 25K, see
-  [components-bom.md](../../manufacturing/bom/components-bom.md)). `COUNTS_PER_REV = 1024` must be **per wheel revolution**. The
-  firmware runs at **wheel scale** (`MOTOR_MAX_RPM 80` ≈ the 120 rpm geared output; open-loop ~14 rpm at
-  20 % PWM), which means the AS5040 effectively reads **wheel-scale** (1024 cnt = 1 wheel rev — mounted on
-  the output side / not multiplied by 30). Odometry is therefore *consistent*, but **verify physically**:
+- ⚠️ **CPR vs wheel + gearbox (1:25)**: the motors are **geared 1:25** (Z4BLD60-24GN-30S + 4GN 25K). `COUNTS_PER_REV = 1024` must be **per wheel revolution**. The firmware runs at **wheel scale** (`MOTOR_MAX_RPM 80` ≈ the 120 rpm geared output; open-loop ~14 rpm at
+20 % PWM), which means the AS5040 effectively reads **wheel-scale** (1024 cnt = 1 wheel rev — mounted on the output side / not multiplied by 30). Odometry is therefore *consistent*, but **verify physically**:
   drive exactly 1 m and compare `/odom`.
 - Raw counts are visible live on `/debug/left` and `/debug/right` (field `z`). See
   the `openamr-platform-fw` debug-telemetry doc (`docs/architecture/debug-telemetry.md`).
