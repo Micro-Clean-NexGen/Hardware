@@ -1,6 +1,6 @@
-# Wiring & Teensy 4.0 pinout
+# Wiring & Arduino MEGA pinout
 
-*Last updated: 2026-06-19.*
+*Last updated: 2026-07-23.*
 
 Convention: **MOTOR1 = LEFT wheel, MOTOR2 = RIGHT wheel.** Logic level **3.3 V**.
 
