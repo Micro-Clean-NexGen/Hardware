@@ -3,7 +3,7 @@
 *How to read the driver's LED blink code and the full fault-code table. Driver: **ZBLD.C20-120L2R**
 (Ningbo Zhongda Leader / ZD), 24 V ±20 %, 7.5 A, 120 W. One per wheel (LEFT = M1, RIGHT = M2).*
 
-*Last updated: 2026-06-26.*
+*Last updated: 2026-07-22.*
 
 > When a driver detects a fault it **STOPS the motor** and blinks an error code on its LEDs. So a red LED
 > is not cosmetic — the motor will not turn until the fault is cleared, even though the Teensy keeps
@@ -63,10 +63,6 @@ in the manufacturer's manual, [ZBLD.C20.pdf](https://image.yhdfa.com/Uploads/Pic
 **Both drivers showing code 10 at once = a shared cause = the 24 V bus is too low** (they share one
 battery). The ZBLD.C20 needs **24 V ±20 % (≈ 19.2–28.8 V)**; below that → under-voltage → both stop.
 - Diagnosis: measure the battery at rest — if **< ~22 V** (let alone < 19 V), that's it.
-- Note: a *charged but weak* battery can still trip code 10 **under load** ("voltage drop / fast
-  acceleration") — the pack sags at the current spike. Same root as the Pi 5 brown-outs
-  ([raspberry-pi.md](../computing/raspberry-pi.md) / [power.md](../power_distribution/power.md)): keep the
-  battery healthy + ≥ 25 V, with short, thick 24 V wiring.
 - Fix: **charge to ≥ 25 V → power-cycle the 24 V → red LED off → wheels turn** (`ros2 topic pub --rate 15
   /debug/openloop geometry_msgs/msg/Vector3 "{x: 100.0}"` with the robot lifted).
 
@@ -77,6 +73,3 @@ battery). The ZBLD.C20 needs **24 V ±20 % (≈ 19.2–28.8 V)**; below that →
   turns freely and the phase wiring isn't shorted.
 - **Code 16 (over-temp)** → let it cool; reduce sustained load.
 
-See also: [motors-drivers.md](motors-drivers.md) (driver model, DIP switches, pots),
-[power.md](../power_distribution/power.md) (battery / 24 V), and the `openamr-platform-sw`
-troubleshooting doc (`docs/troubleshooting/diagnostics.md` in that repo).
