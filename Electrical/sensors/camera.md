@@ -1,6 +1,6 @@
 # Camera (Pi Camera Module 3 NoIR / IMX708)
 
-*Last updated: 2026-06-18.*
+*Last updated: 2026-07-23.*
 
 > **Status: WORKING + CALIBRATED (2026-06-19).** The camera streams to ROS (`/camera/image_raw` +
 > `/camera/camera_info`), and the intrinsics are now calibrated (checkerboard) → `camera_info` publishes
@@ -18,7 +18,7 @@
 ## Communication (Pi ↔ camera)
 The connection is shown in the diagram below.
 
-![Pi Camera Module 3 NoIR (IMX708) -> 15-pin FPC ribbon -> CSI adapter (15->22-pin) -> Raspberry Pi 5 cam1 connector (CSI/MIPI, not USB; libcamera RPi fork)](diagrams/camera-connection.svg)
+![Pi Camera Module 3 NoIR (IMX708) -> 15-pin FPC ribbon -> CSI adapter (15->22-pin) -> Raspberry Pi 5 cam1 connector (CSI/MIPI, not USB; libcamera RPi fork)](camera-connection.svg)
 
 - **CSI / MIPI** ribbon into the Pi's camera connector. Kernel side is fully OK:
   `camera_auto_detect=1` (in `/boot/firmware/config.txt`) loads the overlay; the media graph is
@@ -36,7 +36,6 @@ camera_node → "no cameras available"
 The hardware/kernel are fine — it's purely a libcamera version problem. **Only the Raspberry Pi fork of
 libcamera supports the IMX708.**
 
-**Fix (done 2026-06-18): build the RPi fork of libcamera + `camera_ros` from source in a colcon overlay.**
 On the Pi, in `~/camera_ws`:
 ```bash
 # build deps (apt)
@@ -74,7 +73,7 @@ It is also wired into the main bring-up (`openamr_real_bringup.launch.py`) — j
 before launching. Verified working at both 1280×720 and 640×480 `bgr8` on `/camera/image_raw`
 (1280×720 is the calibrated default).
 
-## ROS interface (provided)
+## ROS interface 
 | Topic | Type | Frame |
 |---|---|---|
 | `/camera/image_raw` | `sensor_msgs/msg/Image` (bgr8, 1280×720) | `camera_optical_frame` |
@@ -151,9 +150,7 @@ Needs `ros-jazzy-rqt-image-view` + `ros-jazzy-image-transport-plugins` on Ubuntu
 Do **not** add a raw Image display in RViz over WiFi (it lags everything).
 
 ## TODO
-1. ✅ **Calibrate** the camera — done 2026-06-19 (see "Intrinsic calibration" above).
+1. ✅ **Calibrate** the camera — done 2026-07-20 (see "Intrinsic calibration" above).
 2. **Camera mount orientation**: the image is rotated ~90° (camera mounted sideways) and possibly tilted
    (not parallel to the ground) → refine the **`camera_link` extrinsic TF** (roll/pitch/yaw) before docking.
 3. Fine-tune autofocus (the `dw9807` AF control logs minor warnings; functional but to configure).
-
-(Reference: "Camera commissioning" in `~/openamr_hardware_bringup_guide/README_OPENAMR_HARDWARE_BRINGUP.md`.)
