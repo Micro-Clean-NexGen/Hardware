@@ -1,11 +1,11 @@
-## Diagram folder used inside hardware repository
+## **Diagram folder used inside hardware repository**
 
-Battery and Charging space
+**Battery and Charging space**
 ![Battery and Charging Space](Baterty%20and%20charging%20space.png)
 
-Mobiltiy Block diagram
+**Mobiltiy Block diagram**
 ![Mobility Block Diagram](Mobility%20Block%20Diagram.png)
 
-Mobility Full Assembly
+**Mobility Full Assembly**
 ![Mobility Full Assembly](Mobility%20FullAssembly.png)
 
