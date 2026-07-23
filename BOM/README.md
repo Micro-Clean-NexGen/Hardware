@@ -1,7 +1,5 @@
-# Components — Bill of Materials & datasheets
+# Components — Bill of Materials 
 
-*Last updated: 2026-06-19.* Identification done by reading the real labels on the robot + manufacturer
-datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact label/marking.
 
 > **Two BOMs, by scope.** This file is the **electrical / electronic** BOM (compute, drivers, motors,
 > sensors, power). The **mechanical** BOM — sheet-metal parts, fasteners, technological operations, and
