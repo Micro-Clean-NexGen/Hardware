@@ -51,9 +51,6 @@ but trust the pattern the driver actually shows, not a computed sum.)*
 | **29** | Over-current feedback error | current-feedback path fault |
 | **30** | **Lack of input phase** | a motor phase (U / V / W) is missing — phase wire disconnected |
 
-*(Codes grouped 1–6 / 7–9 cover the same fault type at different motion phases; exact sub-code detail is
-in the manufacturer's manual, [ZBLD.C20.pdf](https://image.yhdfa.com/Uploads/Picture/PDF/FZ02_11/ZBLD.C20.pdf).)*
-
 ## Clearing a fault
 1. **Fix the cause first** (see the table — e.g. for code 10, recharge the battery to ≥ 25 V).
 2. **Power-cycle the 24 V** (cut, wait a few seconds, restore). Faults **latch** until a power cycle.
