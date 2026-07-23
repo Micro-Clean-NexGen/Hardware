@@ -1,6 +1,5 @@
 Diagram folder used inside hardware repository
 
-![Bteery and charging space](Baterty%and%charging%space.png)
+![Battery and Charging Space](Baterty%20and%20charging%20space.png)
 
-
-![Mobility](Mobility%Block%Diagram.png)
+![Mobility Block Diagram](Mobility%20Block%20Diagram.png)
