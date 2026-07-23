@@ -111,7 +111,7 @@ concern (see the `openamr-platform-sw` troubleshooting doc (`docs/troubleshootin
 
 ## ASCII map
 ```
-                 Teensy 4.0 (3.3V)
+                 Arduino MEGA (3.3V)
    IMU  ── SDA18/SCL19 ───────────────► MPU6500 (I2C 0x68)
    ENC L ── A14/B15 ──────────────────► encoder LEFT
    ENC R ── A11/B12 ──────────────────► encoder RIGHT
