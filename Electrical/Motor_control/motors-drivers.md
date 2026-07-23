@@ -28,7 +28,7 @@ subset of these terminals and uses a specific DIP configuration — both are det
 
 The motor-control signal chain is shown below.
 
-![Figure — per-wheel signal chain: /cmd_vel → Teensy PID (closed loop) → ZBLD driver (open loop) → BLDC → 25:1 gearbox → wheel → AS5040 encoder back to the PID](diagrams/signal-chain.svg)
+![Figure — per-wheel signal chain: /cmd_vel → Teensy PID (closed loop) → ZBLD driver (open loop) → BLDC → 25:1 gearbox → wheel → AS5040 encoder back to the PID](diagrams/signal-chain.png)
 
 Per motor, 3 logic lines from the Teensy:
 
