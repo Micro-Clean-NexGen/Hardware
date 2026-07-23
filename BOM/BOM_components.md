@@ -1,1 +1,0 @@
-## BOM Components list
