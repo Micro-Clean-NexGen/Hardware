@@ -8,14 +8,14 @@ Convention: **MOTOR1 = LEFT wheel, MOTOR2 = RIGHT wheel.** Logic level **3.3 V**
 > **drivers + motors** (ZBLD C20-120L2R + ZD Z4BLD60-24GN-30S, both drivers identical), **encoders**
 > (AS5040; the 5 V→~4 V overvoltage was **fixed → now 3.3 V**, see [encoders.md](../sensors/encoders.md)), **IMU**
 > (MPU-6500, SDA18/SCL19, 3.3 V, 0x68), **Teensy = 4.0** (i.MX RT1062), **power/24 V** (no fuse / no
-> battery cut-off — see [power.md](../power_distribution/power.md)). Component list + datasheets: [components-bom.md](../../manufacturing/bom/components-bom.md).
+> battery cut-off 
 > Still to read (completeness): LiDAR model sticker, DC-DC model, AC/DC converter, gearbox suffix.
 > (Pi RAM confirmed **8 GB**, 2026-07-06 — see [raspberry-pi.md](../computing/raspberry-pi.md).)
 
 The complete power-and-signal wiring is shown in the harness diagram below; the sections that
 follow give the exact pin/terminal tables behind it.
 
-![Figure 1 — OpenAMRobot wiring harness: 24 V power and 3.3 V logic domains, every signal link](diagrams/wiring-harness.svg)
+![Figure 1 — OpenAMRobot wiring harness: 24 V power and 3.3 V logic domains, every signal link](wiring-harness.svg)
 
 ## Teensy 4.0 pin assignment
 
@@ -39,9 +39,6 @@ follow give the exact pin/terminal tables behind it.
 > These values are the firmware's pin configuration — see `openamr-platform-fw`.
 > Note: `MOTOR1_PWM` is pin **1** (pin 21 is **not** a PWM pin on the Teensy 4.x — a common upstream pitfall).
 
-The same assignment is shown as a physical pin map below.
-
-![Figure 2 — Teensy 4.0 pin map: every used pin labeled by function](diagrams/teensy-pinout.svg)
 
 ## Driver wiring — ZBLD C20-120L2R (VERIFIED 2026-06-19)
 
@@ -62,7 +59,7 @@ FWD/DI1  REV/DI2  JOG/DI3  CLR/DI4  BRK/DI5  COM  VAR/AI2  +5V  ERR/DO1  SPD/DO2
 
 The driver's connected terminals and their Teensy links are shown below.
 
-![Figure 3 — ZBLD.C20-120L2R driver connections: the 12-position signal block (only terminals 1/2/6/7 wired), 24 V power, and the 8-pin motor Molex](diagrams/driver-connections.svg)
+![Figure 3 — ZBLD.C20-120L2R driver connections: the 12-position signal block (only terminals 1/2/6/7 wired), 24 V power, and the 8-pin motor Molex](driver-connections.svg)
 
 Unused: `JOG/DI3`, `CLR/DI4`, `BRK/DI5` (brake), `+5V`, `ERR/DO1` (no fault read-back), `SPD/DO2`
 (no speed feedback to the Teensy), `A+/B−` (RS485 not used). Speed/gain is set by the on-board **VAR/AI1**
@@ -79,7 +76,7 @@ pot + **ACC/DEC** ramp pot (see [motors-drivers.md](../motor_control/motors-driv
 
 The switch positions are shown below.
 
-![Figure 4 — driver DIP switches SW1..SW6 in the applied configuration (OFF·ON·OFF·ON·ON·OFF)](diagrams/driver-dip-switches.svg)
+![Figure 4 — driver DIP switches SW1..SW6 in the applied configuration (OFF·ON·OFF·ON·ON·OFF)](driver-dip-switches.svg)
 
 - **SW1 = OFF → open loop** (driver is a power stage; the **Teensy PID** is the sole regulator — best
   for this robot, removes the double loop). *Was ON (closed loop); changed 2026-06-19.* Validated: smooth.
@@ -129,17 +126,10 @@ concern (see the `openamr-platform-sw` troubleshooting doc (`docs/troubleshootin
 
 ![Power_connection_AMR_1](https://github.com/user-attachments/assets/316422bf-0235-4a99-9767-aef7b1126889)
 
-### [E-Stop button and Power distribution - OpenAMRobot discussions](https://github.com/orgs/openAMRobot/discussions/6)
-
-## Schneider (genuine, ~€20–35):
-Harmony XB4-BS542 — Ø22 mm mount, red Ø40 mm mushroom, twist-to-release, metal bezel, 1NC (add a ZBE-102 block for a second NC channel). Certified positive-opening contacts per IEC 60947-5-5 — the one to use for anything CE-facing.
-→ https://www.se.com/ww/en/product/XB4BS542/
-Plastic-bezel equivalent: XB5-AS542, same page structure at se.com.
-
-## Chinese clone (~€1–5):
+## Chinese clone (~ HKD 10–HKD 50):
 XB2-BS542 — same Ø22/Ø40 form factor, 1NC, twist release, 10 A Ith, IP65, IEC 60947-5-1, but no e-stop-specific certification. Fine for prototypes and internal testing.
 → https://www.amazon.com/XB2-BS542-Emergency-Button-Switch-pushbutton/dp/B07Y7KZDSH
 → direct from manufacturer, ~$1/pc: https://www.finglai.com/products/switches/push-buttons/DIA22-XB2-B/XB2-BS542.html
 LAY37 is the same class, usually sold as NO+NC: https://www.amazon.com/LAY37-Mushroom-Emergency-Button-Switch/dp/B07DL333VL [eBay](https://www.ebay.com/itm/356714450971)[Electric-b2c](https://www.electric-b2c.com/products/button-switch-self-reset-xb2-small-mushroom-head-emergency-stop-22mm-knob-key-start-inching-power-on-xb2-bs542-xb2-ba31-xb2-ba42)
 
-Reminder: contacts are ~3 A DC-13 at 24 V, so for the OpenAMRobot battery bus, break a contactor coil with the NC contacts rather than the full motor current.
+Reminder: contacts are ~3 A DC-13 at 24 V, so for the Robot battery bus, break a contactor coil with the NC contacts rather than the full motor current.
