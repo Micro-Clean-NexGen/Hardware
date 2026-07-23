@@ -10,7 +10,7 @@ sends low-current logic signals to the drivers; the drivers deliver the 24 V pow
   nameplate)**, **3000 rpm** motor + **1:25 spur gearbox** (4GN 25K) → **120 rpm** wheel, rated **3.8 A**.
   U/V/W + Hall. (LEFT=M1, RIGHT=M2) See the [sizing calculations](../../datasheets/motor-sizing-calculations.md).
 - **Drivers**: **ZBLD.C20-120L2R** ×2 (24 V, 7.5 A, 120 W). Full specs + datasheets:
-  [components-bom.md](../../manufacturing/bom/components-bom.md). **Red LED / fault blink codes:**
+   **Red LED / fault blink codes:**
   [motor-driver-fault-codes.md](motor-driver-fault-codes.md).
 - ⚠️ **Pole pairs = 5** → verify the driver **DIP SW4/SW5** are set to 5 pole pairs (read the silkscreen
   table on the driver). A wrong pole-pair setting throws off the driver's closed-loop speed scaling.
@@ -19,7 +19,7 @@ sends low-current logic signals to the drivers; the drivers deliver the 24 V pow
 
 The driver's full terminal layout, DIP-switch table, and LED status codes, from the manufacturer:
 
-![ZBLD.C20-120L2R driver setup: 24 V DC+/DC- (fused), motor phases U/V/W + Hall sensors, control inputs FWD/DI1, REV/DI2, JOG/DI3, CLR/DI4, BRK/DI5, COM, VAR/AI2, +5V, ERR/DO1, SPD/DO2, RS485 A/B, the SW1-SW6 DIP-switch configuration table, and the LED status/fault codes](diagrams/zbld-driver-setup-reference.jpg)
+![ZBLD.C20-120L2R driver setup: 24 V DC+/DC- (fused), motor phases U/V/W + Hall sensors, control inputs FWD/DI1, REV/DI2, JOG/DI3, CLR/DI4, BRK/DI5, COM, VAR/AI2, +5V, ERR/DO1, SPD/DO2, RS485 A/B, the SW1-SW6 DIP-switch configuration table, and the LED status/fault codes]()
 
 *Source: ZD **ZBLD.C20-120L2R** product manual (manufacturer reference figure). This robot wires only a
 subset of these terminals and uses a specific DIP configuration — both are detailed below.*
