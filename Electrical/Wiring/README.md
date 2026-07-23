@@ -15,7 +15,7 @@ Convention: **MOTOR1 = LEFT wheel, MOTOR2 = RIGHT wheel.** Logic level **3.3 V**
 The complete power-and-signal wiring is shown in the harness diagram below; the sections that
 follow give the exact pin/terminal tables behind it.
 
-![Figure 1 — OpenAMRobot wiring harness: 24 V power and 3.3 V logic domains, every signal link](wiring-harness.svg)
+![Figure 1 — wiring harness: 24 V power and 3.3 V logic domains, every signal link](wiring-harness.svg)
 
 ## Teensy 4.0 pin assignment
 
