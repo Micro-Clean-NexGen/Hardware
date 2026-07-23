@@ -113,8 +113,6 @@ real velocity read on `/odom/unfiltered`:
 > **~1.0** → no torque shortfall. The floors are **stick-slip (static friction) + coarse Hall commutation
 > at low RPM** (an *operating-point* limit, not a sizing one). Reference: the Z4BLD60-24GN-30S + **1:25**
 > gearbox gives a mechanical no-load max of ~**1.26 m/s** (software-capped to ~0.71 m/s) and ~**3.48 N·m/wheel**
-> (specs in [components-bom.md](../../manufacturing/bom/components-bom.md), derivation in the
-> [sizing calculations](../../datasheets/motor-sizing-calculations.md)).
 
 **Consequence:** keep commanded velocities **above the floors**. Docking applies this (drive taper floored
 at 0.05 m/s, scan rotation 0.17 rad/s, a `min_turn_omega` of 0.15 rad/s with a small deadband so
