@@ -1,3 +1,3 @@
 READ
 
-![Hardware Architecture Diagram](Hardware/Electrical/HW_schema.png)
+![Hardware Architecture Diagram](Electrical/HW_schema.png)
