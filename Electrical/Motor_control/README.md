@@ -28,7 +28,7 @@ subset of these terminals and uses a specific DIP configuration — both are det
 
 The motor-control signal chain is shown below.
 
-![Figure — per-wheel signal chain: /cmd_vel → Teensy PID (closed loop) → ZBLD driver (open loop) → BLDC → 25:1 gearbox → wheel → AS5040 encoder back to the PID](diagrams/signal-chain.png)
+![Figure — per-wheel signal chain: /cmd_vel → Teensy PID (closed loop) → ZBLD driver (open loop) → BLDC → 25:1 gearbox → wheel → AS5040 encoder back to the PID](signal-chain.png)
 
 Per motor, 3 logic lines from the Teensy:
 
@@ -44,18 +44,18 @@ Per motor, 3 logic lines from the Teensy:
 
 Of the driver's twelve control terminals, this robot wires only **four** — the connections are shown below:
 
-![Driver terminal wiring: only DI1 (FWD), DI2 (REV), COM (GND), and AI2 (VAR/PWM speed setpoint) go to the Teensy; DC+/DC- take the fused 24 V and U/V/W + Hall go to the motor](../wiring/diagrams/driver-connections.svg)
+![Driver terminal wiring: only DI1 (FWD), DI2 (REV), COM (GND), and AI2 (VAR/PWM speed setpoint) go to the Teensy; DC+/DC- take the fused 24 V and U/V/W + Hall go to the motor](Wiring/driver-connections.svg)
 
 ## Driver configuration — DIP switches (SW1–SW6)
 Both drivers must be set **identically**. Functions read from the driver silkscreen (2026-06-19):
 
 | Switch | Function | What it does | Was (pre 06-19) | **Now (applied 06-19)** |
 |---|---|---|---|---|
-| **SW1** | open / closed loop (`开环/闭环`) | ON = driver regulates speed itself from the Halls; OFF = driver is just a power stage (Teensy regulates) | ON | **OFF** |
+| **SW1** | open / closed loop | ON = driver regulates speed itself from the Halls; OFF = driver is just a power stage (Teensy regulates) | ON | **OFF** |
 | **SW2** | speed source (`AI1/AI2`) | OFF = internal VAR knob; ON = external 0–5 V on `VAR/AI2` (our Teensy PWM) | ON | ON |
 | **SW3** | secondary (direction/internal) | no effect here (direction is driven by FWD/REV pins) | OFF | OFF |
-| **SW4 / SW5** | **motor pole pairs** (`极对数`) | tells the driver the pole-pair count (2/3/4/5) to convert Hall freq → RPM. **Only used in closed loop** | OFF/OFF (= 2 pp ⚠️) | **ON/ON (= 5 pp)** |
-| **SW6** | RS485 termination (`485 终端电阻`) | bus end resistor; not used (no RS485) | OFF | OFF |
+| **SW4 / SW5** | **motor pole pairs** | tells the driver the pole-pair count (2/3/4/5) to convert Hall freq → RPM. **Only used in closed loop** | OFF/OFF (= 2 pp ⚠️) | **ON/ON (= 5 pp)** |
+| **SW6** | RS485 termination | bus end resistor; not used (no RS485) | OFF | OFF |
 
 > 🔶 **Pole-pair mismatch found & corrected (2026-06-19):** the motor is **P=5** (5 pole pairs, on the
 > nameplate) but SW4/SW5 were OFF/OFF (= 2 pole pairs). Now set to **ON/ON (= 5 pp)**. (Only matters in
