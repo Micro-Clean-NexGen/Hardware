@@ -1,3 +1,3 @@
-## Hardware Architecture of mobility 
+## Electrical Architecture of mobility 
 
 ![Hardware Architecture Diagram](HW_schema.png)
